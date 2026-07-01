@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="No Risk Inferno und House of Snow Dragons verbinden epische Fantasy, moderne Gaming-Kultur, PvE, PvP, MMO und E-Sport." />
   <title>No Risk Inferno x House of Snow Dragons</title>
+
+  <!-- GitHub Pages kompatibel: Alle Bilder liegen im Ordner /assets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Orbitron:wght@400;600;800;900&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -16,13 +20,15 @@
 
     :root {
       --red: #ff1717;
-      --dark-red: #7a0000;
-      --ice: #51d9ff;
-      --ice-soft: #b7f3ff;
+      --dark-red: #610000;
+      --ice: #52d9ff;
+      --ice-soft: #b9f3ff;
       --black: #050507;
-      --metal: #19191d;
+      --panel: rgba(9, 9, 12, 0.86);
       --text: #f5f5f5;
-      --muted: #b6b6b6;
+      --muted: #b8b8b8;
+      --border-red: rgba(255, 23, 23, 0.45);
+      --border-ice: rgba(82, 217, 255, 0.45);
     }
 
     html {
@@ -41,35 +47,35 @@
       content: "";
       position: fixed;
       inset: 0;
-      background:
-        linear-gradient(90deg, rgba(0,0,0,.85), rgba(0,0,0,.35), rgba(0,0,0,.92)),
-        linear-gradient(180deg, rgba(0,0,0,.1), #050507 95%),
-        url("assets/hero-bg.png") center/cover no-repeat;
       z-index: -3;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.92), rgba(0,0,0,.35), rgba(0,0,0,.95)),
+        linear-gradient(180deg, rgba(0,0,0,.12), #050507 92%),
+        url("assets/hero-bg.png") center/cover no-repeat;
     }
 
     body::after {
       content: "";
       position: fixed;
       inset: 0;
-      background:
-        radial-gradient(circle at 18% 30%, rgba(255,23,23,.32), transparent 30%),
-        radial-gradient(circle at 82% 25%, rgba(81,217,255,.18), transparent 28%),
-        radial-gradient(circle at 50% 100%, rgba(255,23,23,.15), transparent 35%);
       z-index: -2;
       pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255,23,23,.34), transparent 28%),
+        radial-gradient(circle at 82% 22%, rgba(82,217,255,.17), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(255,23,23,.18), transparent 38%);
     }
 
-    .page-glow {
+    .grid-glow {
       position: fixed;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 55px 55px;
-      mask-image: linear-gradient(to bottom, black, transparent 90%);
-      pointer-events: none;
       z-index: -1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.026) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
     }
 
     header {
@@ -78,36 +84,40 @@
       left: 0;
       width: 100%;
       z-index: 20;
-      padding: 18px 7%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      background: rgba(5,5,7,.68);
-      border-bottom: 1px solid rgba(255,23,23,.4);
+      justify-content: space-between;
+      gap: 30px;
+      padding: 16px 7%;
+      background: rgba(5, 5, 7, 0.72);
+      border-bottom: 1px solid var(--border-red);
+      box-shadow: 0 0 38px rgba(255, 23, 23, 0.2);
       backdrop-filter: blur(12px);
-      box-shadow: 0 0 35px rgba(255,23,23,.18);
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 15px;
+      min-width: 0;
     }
 
     .brand img {
-      width: 64px;
-      height: 64px;
+      width: 62px;
+      height: 62px;
       object-fit: contain;
-      filter: drop-shadow(0 0 14px rgba(255,23,23,.8));
+      filter: drop-shadow(0 0 14px rgba(255, 23, 23, .9));
+      flex: 0 0 auto;
     }
 
     .brand-title {
       font-family: 'Cinzel', serif;
-      font-size: clamp(18px, 2vw, 30px);
+      font-size: clamp(17px, 2vw, 30px);
       font-weight: 900;
       letter-spacing: 2px;
       text-transform: uppercase;
-      background: linear-gradient(180deg, #ffffff, #9a9a9a 35%, #ff2020 70%, #4b0000);
+      white-space: nowrap;
+      background: linear-gradient(180deg, #ffffff, #a7a7a7 34%, #ff2727 70%, #420000);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 0 10px rgba(255,0,0,.55));
@@ -115,17 +125,18 @@
 
     nav {
       display: flex;
-      gap: 28px;
+      align-items: center;
+      gap: 26px;
     }
 
     nav a {
-      color: white;
+      color: #fff;
       text-decoration: none;
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      transition: .25s;
+      transition: .25s ease;
     }
 
     nav a:hover {
@@ -135,15 +146,11 @@
 
     .hero {
       min-height: 100vh;
-      padding: 150px 7% 70px;
       display: grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1.14fr .86fr;
       align-items: center;
-      gap: 50px;
-    }
-
-    .hero-text {
-      max-width: 820px;
+      gap: 54px;
+      padding: 150px 7% 70px;
     }
 
     .tagline {
@@ -151,353 +158,356 @@
       align-items: center;
       gap: 10px;
       padding: 10px 18px;
-      border: 1px solid rgba(255,23,23,.6);
-      background: linear-gradient(90deg, rgba(255,23,23,.18), rgba(81,217,255,.08));
+      border: 1px solid rgba(255,23,23,.66);
       border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,23,23,.20), rgba(82,217,255,.08));
       color: var(--ice-soft);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 2px;
       text-transform: uppercase;
-      box-shadow: 0 0 25px rgba(255,23,23,.22);
+      box-shadow: 0 0 28px rgba(255,23,23,.22);
     }
 
     h1 {
-      margin-top: 28px;
+      margin-top: 30px;
       font-family: 'Cinzel', serif;
-      font-size: clamp(48px, 7vw, 108px);
+      font-size: clamp(46px, 7vw, 108px);
       line-height: .92;
-      text-transform: uppercase;
       letter-spacing: 3px;
-      color: white;
+      text-transform: uppercase;
+      color: #fff;
       text-shadow:
-        0 0 12px rgba(255,23,23,.9),
-        0 0 40px rgba(255,23,23,.45),
-        3px 3px 0 #230000;
+        0 0 12px rgba(255,23,23,.95),
+        0 0 42px rgba(255,23,23,.52),
+        3px 3px 0 #250000;
     }
 
     h1 span {
       display: block;
-      background: linear-gradient(180deg, #ffffff 0%, #b7b7b7 36%, #ff1717 63%, #4c0000 100%);
+      background: linear-gradient(180deg, #ffffff 0%, #b9b9b9 34%, #ff1717 64%, #4b0000 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .subtitle {
-      margin-top: 24px;
-      max-width: 760px;
+      max-width: 790px;
+      margin-top: 26px;
       color: var(--muted);
       font-size: clamp(15px, 1.35vw, 19px);
       line-height: 1.85;
-      text-shadow: 0 0 10px rgba(0,0,0,.9);
+      text-shadow: 0 0 12px rgba(0,0,0,.95);
     }
 
     .subtitle strong {
-      color: white;
-      text-shadow: 0 0 10px rgba(255,23,23,.7);
+      color: #fff;
+      text-shadow: 0 0 12px rgba(255,23,23,.75);
     }
 
     .buttons {
-      margin-top: 34px;
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
+      margin-top: 36px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 180px;
+      min-width: 184px;
       padding: 15px 24px;
-      border-radius: 6px;
+      border-radius: 7px;
+      border: 1px solid rgba(255,255,255,.18);
       text-decoration: none;
-      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      transition: .25s;
-      border: 1px solid rgba(255,255,255,.18);
+      font-weight: 900;
+      transition: .25s ease;
     }
 
     .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, #ff1717, #570000);
-      box-shadow: 0 0 25px rgba(255,23,23,.45);
+      color: #fff;
+      background: linear-gradient(135deg, #ff1717, #520000);
+      box-shadow: 0 0 28px rgba(255,23,23,.48);
     }
 
     .btn-secondary {
       color: var(--ice-soft);
       background: rgba(255,255,255,.04);
-      border-color: rgba(81,217,255,.55);
-      box-shadow: 0 0 20px rgba(81,217,255,.12);
+      border-color: var(--border-ice);
+      box-shadow: 0 0 22px rgba(82,217,255,.13);
     }
 
     .btn:hover {
       transform: translateY(-3px) scale(1.02);
-      filter: brightness(1.18);
+      filter: brightness(1.16);
     }
 
     .hero-card {
       position: relative;
       min-height: 560px;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
 
     .hero-card::before {
       content: "";
       position: absolute;
-      width: 390px;
-      height: 390px;
+      width: 392px;
+      height: 392px;
       border-radius: 50%;
-      background:
-        radial-gradient(circle, transparent 45%, rgba(255,23,23,.9) 47%, rgba(255,23,23,.08) 53%, transparent 58%);
-      box-shadow: 0 0 80px rgba(255,23,23,.55);
+      background: radial-gradient(circle, transparent 45%, rgba(255,23,23,.92) 47%, rgba(255,23,23,.08) 54%, transparent 60%);
+      box-shadow: 0 0 86px rgba(255,23,23,.62);
       animation: pulse 3s infinite ease-in-out;
     }
 
-    .hero-card img.logo-main {
+    .logo-main {
       position: absolute;
-      top: 15px;
+      top: 8px;
       width: min(410px, 85vw);
-      filter: drop-shadow(0 0 35px rgba(255,23,23,.75));
-      opacity: .9;
+      opacity: .92;
+      filter: drop-shadow(0 0 36px rgba(255,23,23,.78));
     }
 
-    .hero-card img.character {
+    .character {
       position: absolute;
       bottom: 0;
-      width: min(410px, 80vw);
+      width: min(405px, 78vw);
       max-height: 560px;
       object-fit: contain;
-      filter: drop-shadow(0 0 35px rgba(0,0,0,.95));
       border-radius: 18px;
-      opacity: .92;
+      opacity: .94;
+      filter: drop-shadow(0 0 35px rgba(0,0,0,.95));
       mask-image: linear-gradient(to bottom, black 72%, transparent 100%);
     }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(.96); opacity: .75; }
+      0%, 100% { transform: scale(.96); opacity: .74; }
       50% { transform: scale(1.04); opacity: 1; }
     }
 
     section {
-      padding: 90px 7%;
+      padding: 92px 7%;
     }
 
     .section-title {
+      margin-bottom: 20px;
       font-family: 'Cinzel', serif;
       font-size: clamp(34px, 4vw, 64px);
+      line-height: 1;
+      text-align: center;
       text-transform: uppercase;
       letter-spacing: 3px;
-      text-align: center;
-      margin-bottom: 20px;
-      text-shadow: 0 0 24px rgba(255,23,23,.65);
+      text-shadow: 0 0 24px rgba(255,23,23,.66);
     }
 
     .section-subtitle {
+      max-width: 880px;
+      margin: 0 auto 52px;
       text-align: center;
-      max-width: 850px;
-      margin: 0 auto 50px;
       color: var(--muted);
-      line-height: 1.8;
+      line-height: 1.85;
     }
 
     .about-box {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: auto;
-      padding: 42px;
-      border: 1px solid rgba(255,23,23,.42);
+      padding: 44px;
+      border: 1px solid var(--border-red);
       border-radius: 18px;
-      background:
-        linear-gradient(135deg, rgba(255,23,23,.12), rgba(81,217,255,.06)),
-        rgba(8,8,10,.82);
-      box-shadow:
-        inset 0 0 60px rgba(255,23,23,.06),
-        0 0 55px rgba(0,0,0,.65);
+      background: linear-gradient(135deg, rgba(255,23,23,.13), rgba(82,217,255,.06)), var(--panel);
+      box-shadow: inset 0 0 64px rgba(255,23,23,.07), 0 0 58px rgba(0,0,0,.68);
       backdrop-filter: blur(10px);
     }
 
     .about-box p {
+      color: #dedede;
       font-size: clamp(15px, 1.2vw, 18px);
       line-height: 2;
-      color: #dddddd;
       text-align: center;
     }
 
     .about-box strong {
-      color: white;
-      text-shadow: 0 0 12px rgba(255,23,23,.7);
+      color: #fff;
+      text-shadow: 0 0 13px rgba(255,23,23,.72);
     }
 
     .features {
+      max-width: 1220px;
+      margin: auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      max-width: 1200px;
-      margin: auto;
     }
 
     .feature-card {
+      position: relative;
+      min-height: 268px;
+      overflow: hidden;
       padding: 32px;
-      min-height: 260px;
-      background: linear-gradient(180deg, rgba(25,25,29,.92), rgba(5,5,7,.96));
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 0 35px rgba(0,0,0,.55);
-      transition: .25s;
+      background: linear-gradient(180deg, rgba(25,25,29,.94), rgba(5,5,7,.97));
+      box-shadow: 0 0 35px rgba(0,0,0,.58);
+      transition: .25s ease;
     }
 
     .feature-card::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top left, rgba(255,23,23,.28), transparent 45%);
-      opacity: .8;
+      background: radial-gradient(circle at top left, rgba(255,23,23,.30), transparent 45%);
+      opacity: .85;
     }
 
     .feature-card:hover {
       transform: translateY(-8px);
-      border-color: rgba(255,23,23,.75);
-      box-shadow: 0 0 38px rgba(255,23,23,.2);
+      border-color: rgba(255,23,23,.76);
+      box-shadow: 0 0 40px rgba(255,23,23,.22);
     }
 
-    .feature-card h3,
-    .feature-card p,
-    .feature-card .icon {
+    .icon, .feature-card h3, .feature-card p {
       position: relative;
       z-index: 2;
     }
 
     .icon {
-      font-size: 42px;
       margin-bottom: 18px;
-      filter: drop-shadow(0 0 10px rgba(255,23,23,.8));
+      font-size: 42px;
+      filter: drop-shadow(0 0 10px rgba(255,23,23,.86));
     }
 
     .feature-card h3 {
+      margin-bottom: 14px;
       font-family: 'Cinzel', serif;
       font-size: 24px;
-      margin-bottom: 14px;
       text-transform: uppercase;
     }
 
     .feature-card p {
       color: var(--muted);
-      line-height: 1.75;
       font-size: 14px;
+      line-height: 1.78;
     }
 
     .split {
+      max-width: 1220px;
+      margin: auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 30px;
-      max-width: 1200px;
-      margin: auto;
       align-items: stretch;
     }
 
     .faction {
-      padding: 38px;
-      border-radius: 20px;
-      background: rgba(5,5,7,.78);
-      border: 1px solid rgba(255,255,255,.14);
-      min-height: 340px;
-      overflow: hidden;
       position: relative;
+      min-height: 342px;
+      overflow: hidden;
+      padding: 38px;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 20px;
+      background: rgba(5,5,7,.80);
     }
 
     .faction.inferno {
-      box-shadow: inset 0 0 60px rgba(255,23,23,.12), 0 0 35px rgba(255,23,23,.14);
+      box-shadow: inset 0 0 64px rgba(255,23,23,.13), 0 0 36px rgba(255,23,23,.15);
     }
 
     .faction.frost {
-      box-shadow: inset 0 0 60px rgba(81,217,255,.12), 0 0 35px rgba(81,217,255,.12);
+      box-shadow: inset 0 0 64px rgba(82,217,255,.13), 0 0 36px rgba(82,217,255,.13);
     }
 
     .faction h3 {
+      margin-bottom: 18px;
       font-family: 'Cinzel', serif;
       font-size: 32px;
       text-transform: uppercase;
-      margin-bottom: 18px;
     }
 
     .faction p {
       color: var(--muted);
-      line-height: 1.8;
+      line-height: 1.84;
     }
 
-    .faction.inferno h3 {
+    .inferno h3 {
       color: #ff4a4a;
-      text-shadow: 0 0 16px rgba(255,23,23,.8);
+      text-shadow: 0 0 16px rgba(255,23,23,.86);
     }
 
-    .faction.frost h3 {
+    .frost h3 {
       color: var(--ice-soft);
-      text-shadow: 0 0 16px rgba(81,217,255,.7);
+      text-shadow: 0 0 16px rgba(82,217,255,.72);
+    }
+
+    .community {
+      max-width: 1220px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 22px;
+    }
+
+    .community-card {
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(5,5,7,.78);
+      box-shadow: 0 0 30px rgba(0,0,0,.48);
+    }
+
+    .community-card h3 {
+      margin-bottom: 12px;
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .community-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
     }
 
     footer {
-      padding: 32px 7%;
+      padding: 34px 7%;
       text-align: center;
-      color: #9c9c9c;
-      background: rgba(0,0,0,.78);
-      border-top: 1px solid rgba(255,23,23,.35);
+      color: #9f9f9f;
+      background: rgba(0,0,0,.80);
+      border-top: 1px solid var(--border-red);
       letter-spacing: 1px;
       font-size: 13px;
     }
 
     @media (max-width: 980px) {
-      nav {
-        display: none;
-      }
+      nav { display: none; }
 
       .hero {
         grid-template-columns: 1fr;
         text-align: center;
       }
 
-      .buttons {
-        justify-content: center;
-      }
+      .buttons { justify-content: center; }
 
-      .hero-card {
-        min-height: 460px;
-      }
+      .hero-card { min-height: 470px; }
 
-      .features,
-      .split {
+      .features, .split, .community {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 560px) {
-      header {
-        padding: 14px 5%;
-      }
-
-      .brand img {
-        width: 52px;
-        height: 52px;
-      }
-
-      .hero {
-        padding-top: 130px;
-      }
-
-      .about-box,
-      .feature-card,
-      .faction {
-        padding: 26px;
-      }
+      header { padding: 13px 5%; }
+      .brand img { width: 50px; height: 50px; }
+      .brand-title { white-space: normal; }
+      .hero { padding-top: 128px; }
+      .about-box, .feature-card, .faction, .community-card { padding: 26px; }
     }
   </style>
 </head>
 <body>
-  <div class="page-glow"></div>
+  <div class="grid-glow"></div>
 
   <header>
     <div class="brand">
@@ -508,8 +518,9 @@
     <nav>
       <a href="#start">Start</a>
       <a href="#story">Story</a>
-      <a href="#features">Gameplay</a>
+      <a href="#gameplay">Gameplay</a>
       <a href="#fraktionen">Fraktionen</a>
+      <a href="#community">Community</a>
     </nav>
   </header>
 
@@ -521,24 +532,24 @@
         <span>Inferno</span>
       </h1>
       <p class="subtitle">
-        <strong>No Risk Inferno🔥 und House of Snow Dragons🐉❄️</strong> vereinen epische Fantasy mit moderner Gaming-Kultur. Mächtige Drachen, eisige Schlachten und Inferno Arenen treffen auf strategisches Gameplay.
+        <strong>No Risk Inferno🔥 und House of Snow Dragons🐉❄️</strong> vereinen epische Fantasy mit moderner Gaming-Kultur. Feuer, Frost, Drachen und Gaming treffen in einer düsteren Arena-Welt aufeinander.
       </p>
       <div class="buttons">
         <a class="btn btn-primary" href="#story">Mehr erfahren</a>
-        <a class="btn btn-secondary" href="#features">Gameplay ansehen</a>
+        <a class="btn btn-secondary" href="#gameplay">Gameplay ansehen</a>
       </div>
     </div>
 
     <div class="hero-card">
       <img class="logo-main" src="assets/logo.png" alt="House of Snow Dragons Emblem">
-      <img class="character" src="assets/character.png" alt="Charakter">
+      <img class="character" src="assets/character.png" alt="No Risk Inferno Charakter">
     </div>
   </main>
 
   <section id="story">
     <h2 class="section-title">Mythen. Feuer. Frost.</h2>
     <p class="section-subtitle">
-      Eine moderne Gaming-Welt mit epischer Fantasy-Atmosphäre, Drachenmacht, Rivalität und Community-Fokus.
+      Eine moderne Gaming-Welt mit epischer Fantasy-Atmosphäre, Drachenmacht, Rivalität und starkem Community-Fokus.
     </p>
 
     <div class="about-box">
@@ -550,17 +561,17 @@
     </div>
   </section>
 
-  <section id="features">
+  <section id="gameplay">
     <h2 class="section-title">Gameplay Highlights</h2>
     <p class="section-subtitle">
-      Von PvE-Abenteuern bis PvP-Arenen: Die Webseite ist auf Fantasy, Gaming und E-Sport ausgelegt.
+      Die Webseite ist für Fantasy, Gaming, MMO-Atmosphäre und E-Sport ausgelegt.
     </p>
 
     <div class="features">
       <div class="feature-card">
         <div class="icon">🐉</div>
         <h3>Drachenwelt</h3>
-        <p>Eine dunkle Fantasy-Atmosphäre mit mächtigen Drachen, uralten Symbolen und legendären Kämpfen.</p>
+        <p>Eine dunkle Fantasy-Atmosphäre mit mächtigen Drachen, uralten Symbolen, Legenden und epischen Schlachten.</p>
       </div>
 
       <div class="feature-card">
@@ -572,7 +583,7 @@
       <div class="feature-card">
         <div class="icon">❄️</div>
         <h3>Frost & Strategie</h3>
-        <p>Teamplay, Taktik und Skill stehen im Mittelpunkt – perfekt für MMO-Fans und E-Sport-Spieler.</p>
+        <p>Teamplay, Taktik und Skill stehen im Mittelpunkt – perfekt für MMO-Fans und ambitionierte E-Sport-Spieler.</p>
       </div>
     </div>
   </section>
@@ -587,15 +598,39 @@
       <div class="faction inferno">
         <h3>No Risk Inferno 🔥</h3>
         <p>
-          Aggressiv, heiß und voller Energie. No Risk Inferno steht für Mut, Action, Arena-Kämpfe und kompromisslosen Wettbewerb.
+          Aggressiv, heiß und voller Energie. No Risk Inferno steht für Mut, Action, Arena-Kämpfe und kompromisslosen Wettbewerb. Hier geht es um Risiko, Ruhm und den nächsten Sieg.
         </p>
       </div>
 
       <div class="faction frost">
         <h3>House of Snow Dragons 🐉❄️</h3>
         <p>
-          Mystisch, mächtig und taktisch. House of Snow Dragons verbindet Drachenmacht, frostige Eleganz und epische Fantasy-Atmosphäre.
+          Mystisch, mächtig und taktisch. House of Snow Dragons verbindet Drachenmacht, frostige Eleganz, Teamplay und epische Fantasy-Atmosphäre zu einer starken Community-Marke.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="community">
+    <h2 class="section-title">Für Fun4Gamer</h2>
+    <p class="section-subtitle">
+      Eine Webseite für Community, immersive Welten und packende Herausforderungen.
+    </p>
+
+    <div class="community">
+      <div class="community-card">
+        <h3>PvE Abenteuer</h3>
+        <p>Erlebe Missionen, Bosskämpfe, Fantasy-Atmosphäre und gemeinsame Herausforderungen mit deinem Team.</p>
+      </div>
+
+      <div class="community-card">
+        <h3>PvP Action</h3>
+        <p>Kämpfe in Arenen, zeige Skill und dominiere Rivalen in intensiven Wettbewerben.</p>
+      </div>
+
+      <div class="community-card">
+        <h3>Community</h3>
+        <p>Eine starke Gaming-Gemeinschaft mit Zusammenhalt, Spaß, Events und epischen Momenten.</p>
       </div>
     </div>
   </section>
