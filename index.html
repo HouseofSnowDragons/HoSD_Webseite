@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>No Risk Inferno x House of Snow Dragons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Orbitron:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --red: #ff1717;
+      --dark-red: #7a0000;
+      --ice: #51d9ff;
+      --ice-soft: #b7f3ff;
+      --black: #050507;
+      --metal: #19191d;
+      --text: #f5f5f5;
+      --muted: #b6b6b6;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--text);
+      background: var(--black);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.85), rgba(0,0,0,.35), rgba(0,0,0,.92)),
+        linear-gradient(180deg, rgba(0,0,0,.1), #050507 95%),
+        url("assets/hero-bg.png") center/cover no-repeat;
+      z-index: -3;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(255,23,23,.32), transparent 30%),
+        radial-gradient(circle at 82% 25%, rgba(81,217,255,.18), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(255,23,23,.15), transparent 35%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .page-glow {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 55px 55px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(5,5,7,.68);
+      border-bottom: 1px solid rgba(255,23,23,.4);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 35px rgba(255,23,23,.18);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .brand img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 14px rgba(255,23,23,.8));
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(18px, 2vw, 30px);
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #ffffff, #9a9a9a 35%, #ff2020 70%, #4b0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 10px rgba(255,0,0,.55));
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: .25s;
+    }
+
+    nav a:hover {
+      color: var(--red);
+      text-shadow: 0 0 12px var(--red);
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 7% 70px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero-text {
+      max-width: 820px;
+    }
+
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border: 1px solid rgba(255,23,23,.6);
+      background: linear-gradient(90deg, rgba(255,23,23,.18), rgba(81,217,255,.08));
+      border-radius: 999px;
+      color: var(--ice-soft);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      box-shadow: 0 0 25px rgba(255,23,23,.22);
+    }
+
+    h1 {
+      margin-top: 28px;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(48px, 7vw, 108px);
+      line-height: .92;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: white;
+      text-shadow:
+        0 0 12px rgba(255,23,23,.9),
+        0 0 40px rgba(255,23,23,.45),
+        3px 3px 0 #230000;
+    }
+
+    h1 span {
+      display: block;
+      background: linear-gradient(180deg, #ffffff 0%, #b7b7b7 36%, #ff1717 63%, #4c0000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      margin-top: 24px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(15px, 1.35vw, 19px);
+      line-height: 1.85;
+      text-shadow: 0 0 10px rgba(0,0,0,.9);
+    }
+
+    .subtitle strong {
+      color: white;
+      text-shadow: 0 0 10px rgba(255,23,23,.7);
+    }
+
+    .buttons {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      padding: 15px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: .25s;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, #ff1717, #570000);
+      box-shadow: 0 0 25px rgba(255,23,23,.45);
+    }
+
+    .btn-secondary {
+      color: var(--ice-soft);
+      background: rgba(255,255,255,.04);
+      border-color: rgba(81,217,255,.55);
+      box-shadow: 0 0 20px rgba(81,217,255,.12);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      filter: brightness(1.18);
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 560px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 390px;
+      height: 390px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, transparent 45%, rgba(255,23,23,.9) 47%, rgba(255,23,23,.08) 53%, transparent 58%);
+      box-shadow: 0 0 80px rgba(255,23,23,.55);
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    .hero-card img.logo-main {
+      position: absolute;
+      top: 15px;
+      width: min(410px, 85vw);
+      filter: drop-shadow(0 0 35px rgba(255,23,23,.75));
+      opacity: .9;
+    }
+
+    .hero-card img.character {
+      position: absolute;
+      bottom: 0;
+      width: min(410px, 80vw);
+      max-height: 560px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 35px rgba(0,0,0,.95));
+      border-radius: 18px;
+      opacity: .92;
+      mask-image: linear-gradient(to bottom, black 72%, transparent 100%);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(.96); opacity: .75; }
+      50% { transform: scale(1.04); opacity: 1; }
+    }
+
+    section {
+      padding: 90px 7%;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(34px, 4vw, 64px);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 24px rgba(255,23,23,.65);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto 50px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .about-box {
+      max-width: 1100px;
+      margin: auto;
+      padding: 42px;
+      border: 1px solid rgba(255,23,23,.42);
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, rgba(255,23,23,.12), rgba(81,217,255,.06)),
+        rgba(8,8,10,.82);
+      box-shadow:
+        inset 0 0 60px rgba(255,23,23,.06),
+        0 0 55px rgba(0,0,0,.65);
+      backdrop-filter: blur(10px);
+    }
+
+    .about-box p {
+      font-size: clamp(15px, 1.2vw, 18px);
+      line-height: 2;
+      color: #dddddd;
+      text-align: center;
+    }
+
+    .about-box strong {
+      color: white;
+      text-shadow: 0 0 12px rgba(255,23,23,.7);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .feature-card {
+      padding: 32px;
+      min-height: 260px;
+      background: linear-gradient(180deg, rgba(25,25,29,.92), rgba(5,5,7,.96));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(0,0,0,.55);
+      transition: .25s;
+    }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(255,23,23,.28), transparent 45%);
+      opacity: .8;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,23,23,.75);
+      box-shadow: 0 0 38px rgba(255,23,23,.2);
+    }
+
+    .feature-card h3,
+    .feature-card p,
+    .feature-card .icon {
+      position: relative;
+      z-index: 2;
+    }
+
+    .icon {
+      font-size: 42px;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 0 10px rgba(255,23,23,.8));
+    }
+
+    .feature-card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+      align-items: stretch;
+    }
+
+    .faction {
+      padding: 38px;
+      border-radius: 20px;
+      background: rgba(5,5,7,.78);
+      border: 1px solid rgba(255,255,255,.14);
+      min-height: 340px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .faction.inferno {
+      box-shadow: inset 0 0 60px rgba(255,23,23,.12), 0 0 35px rgba(255,23,23,.14);
+    }
+
+    .faction.frost {
+      box-shadow: inset 0 0 60px rgba(81,217,255,.12), 0 0 35px rgba(81,217,255,.12);
+    }
+
+    .faction h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .faction p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .faction.inferno h3 {
+      color: #ff4a4a;
+      text-shadow: 0 0 16px rgba(255,23,23,.8);
+    }
+
+    .faction.frost h3 {
+      color: var(--ice-soft);
+      text-shadow: 0 0 16px rgba(81,217,255,.7);
+    }
+
+    footer {
+      padding: 32px 7%;
+      text-align: center;
+      color: #9c9c9c;
+      background: rgba(0,0,0,.78);
+      border-top: 1px solid rgba(255,23,23,.35);
+      letter-spacing: 1px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      nav {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+
+      .hero-card {
+        min-height: 460px;
+      }
+
+      .features,
+      .split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding: 14px 5%;
+      }
+
+      .brand img {
+        width: 52px;
+        height: 52px;
+      }
+
+      .hero {
+        padding-top: 130px;
+      }
+
+      .about-box,
+      .feature-card,
+      .faction {
+        padding: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-glow"></div>
+
+  <header>
+    <div class="brand">
+      <img src="assets/logo.png" alt="House of Snow Dragons Logo">
+      <div class="brand-title">House of Snow Dragons</div>
+    </div>
+
+    <nav>
+      <a href="#start">Start</a>
+      <a href="#story">Story</a>
+      <a href="#features">Gameplay</a>
+      <a href="#fraktionen">Fraktionen</a>
+    </nav>
+  </header>
+
+  <main id="start" class="hero">
+    <div class="hero-text">
+      <div class="tagline">🔥 No Risk Inferno trifft Drachenmacht 🐉❄️</div>
+      <h1>
+        No Risk
+        <span>Inferno</span>
+      </h1>
+      <p class="subtitle">
+        <strong>No Risk Inferno🔥 und House of Snow Dragons🐉❄️</strong> vereinen epische Fantasy mit moderner Gaming-Kultur. Mächtige Drachen, eisige Schlachten und Inferno Arenen treffen auf strategisches Gameplay.
+      </p>
+      <div class="buttons">
+        <a class="btn btn-primary" href="#story">Mehr erfahren</a>
+        <a class="btn btn-secondary" href="#features">Gameplay ansehen</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <img class="logo-main" src="assets/logo.png" alt="House of Snow Dragons Emblem">
+      <img class="character" src="assets/character.png" alt="Charakter">
+    </div>
+  </main>
+
+  <section id="story">
+    <h2 class="section-title">Mythen. Feuer. Frost.</h2>
+    <p class="section-subtitle">
+      Eine moderne Gaming-Welt mit epischer Fantasy-Atmosphäre, Drachenmacht, Rivalität und Community-Fokus.
+    </p>
+
+    <div class="about-box">
+      <p>
+        <strong>No Risk Inferno🔥 und House of Snow Dragons🐉❄️</strong>, vereinen epische Fantasy mit moderner Gaming-Kultur. Mächtige Drachen, eisige Schlachten und Inferno Arenen treffen auf strategisches Gameplay, das sowohl MMO-Fans als auch ambitionierte E-Sport-Spieler begeistert.
+        <br><br>
+        In einer Welt voller Mythen, Rivalitäten und Teamplay geht es um Ruhm, Skill und den Nervenkitzel des Wettbewerbs. Egal ob PvE-Abenteuer oder PvP-Action – hier steht der Spaß am Spiel im Mittelpunkt. Ein echtes Highlight für Fun4Gamer, die immersive Welten, starke Communitys und packende Herausforderungen lieben.
+      </p>
+    </div>
+  </section>
+
+  <section id="features">
+    <h2 class="section-title">Gameplay Highlights</h2>
+    <p class="section-subtitle">
+      Von PvE-Abenteuern bis PvP-Arenen: Die Webseite ist auf Fantasy, Gaming und E-Sport ausgelegt.
+    </p>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="icon">🐉</div>
+        <h3>Drachenwelt</h3>
+        <p>Eine dunkle Fantasy-Atmosphäre mit mächtigen Drachen, uralten Symbolen und legendären Kämpfen.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon">🔥</div>
+        <h3>Inferno Arenen</h3>
+        <p>Intensive Kämpfe, starke Rivalitäten und actionreiche Wettkämpfe für Spieler mit echtem Ehrgeiz.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="icon">❄️</div>
+        <h3>Frost & Strategie</h3>
+        <p>Teamplay, Taktik und Skill stehen im Mittelpunkt – perfekt für MMO-Fans und E-Sport-Spieler.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="fraktionen">
+    <h2 class="section-title">Zwei Welten</h2>
+    <p class="section-subtitle">
+      Feuer und Eis treffen aufeinander und erschaffen eine starke Gaming-Identität.
+    </p>
+
+    <div class="split">
+      <div class="faction inferno">
+        <h3>No Risk Inferno 🔥</h3>
+        <p>
+          Aggressiv, heiß und voller Energie. No Risk Inferno steht für Mut, Action, Arena-Kämpfe und kompromisslosen Wettbewerb.
+        </p>
+      </div>
+
+      <div class="faction frost">
+        <h3>House of Snow Dragons 🐉❄️</h3>
+        <p>
+          Mystisch, mächtig und taktisch. House of Snow Dragons verbindet Drachenmacht, frostige Eleganz und epische Fantasy-Atmosphäre.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 No Risk Inferno x House of Snow Dragons — Fantasy Gaming Community
+  </footer>
+</body>
+</html>
